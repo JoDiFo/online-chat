@@ -3,7 +3,6 @@
 :root {
   --font-size-m: 16px;
   --font-size-l: 20px;
-
   --max-message-width: 35%;
 }
 
@@ -52,19 +51,15 @@ input {
 
 .sidebar {
   background-color: #787878;
-
   width: 60px;
-
   flex-shrink: 0;
   display: flex;
   justify-content: center;
-
   padding-top: 5px;
 }
 
 .burger-menu {
   background-color: #d9d9d9;
-
   width: 30px;
   height: 30px;
 }
@@ -81,6 +76,7 @@ input {
   .chat-list::-webkit-scrollbar {
     background: #d9d9d9;
   }
+
   .chat-list::-webkit-scrollbar-thumb {
     background: #787878;
   }
@@ -88,63 +84,49 @@ input {
 
 .chat-list {
   position: relative;
-
   background-color: #c9c9c9;
-
   width: 429px;
-
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   row-gap: 5px;
-
   padding-top: 5px;
-
   overflow-y: scroll;
 }
 
 .search-bar {
   background-color: #ababab;
-
   width: 409px;
   height: 30px;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
-
   padding-right: 3px;
 }
 
 .chat-list .search-icon {
   background-color: #d9d9d9;
-
   width: 24px;
   height: 24px;
 }
 
 .chat-item {
   background-color: #d9d9d9;
-
   width: 100%;
   height: 70px;
-
   display: flex;
   align-items: center;
   column-gap: 10px;
   flex-shrink: 0;
-
   padding-left: 10px;
-
   cursor: pointer;
 }
 
 .user-avatar {
   background-color: #5b5757;
-
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -159,9 +141,7 @@ input {
   z-index: 1;
   bottom: 10px;
   left: 420px;
-
   background-color: #787878;
-
   width: 50px;
   height: 50px;
 }
@@ -170,7 +150,6 @@ input {
 
 .chat-zone {
   background-color: #e7e7e7;
-
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -182,12 +161,9 @@ input {
 
 .chat-head {
   position: relative;
-
   background-color: #828282;
-
   width: 100%;
   height: 40px;
-
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -198,9 +174,7 @@ input {
   position: absolute;
   top: 10px;
   right: 10px;
-
   background-color: #d9d9d9;
-
   width: 20px;
   height: 20px;
 }
@@ -214,26 +188,20 @@ input {
 
 .chat-messages {
   position: relative;
-
   height: calc(100% - 40px - 50px - 10px);
-
   flex-grow: 1;
   flex-shrink: 0;
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: min-content;
   row-gap: 5px;
-
   padding-inline: 30px;
-
   overflow-y: scroll;
 }
 
 .message {
   max-width: var(--max-message-width);
-
   border-radius: 20px;
-
   font-size: var(--font-size-m);
   padding: 7px 13px;
 }
@@ -245,24 +213,18 @@ input {
 .received {
   position: relative;
   background-color: #5b5757;
-
-  border-bottom-left-radius: 0px;
-
+  border-bottom-left-radius: 0;
   justify-self: left;
 }
 
 .received::before {
   content: "";
-
   position: absolute;
   z-index: 1;
   bottom: 0;
   left: -10px;
-
   background-color: #e7e7e7;
-
   display: block;
-
   width: 10px;
   height: 10px;
   border-bottom-right-radius: 10px;
@@ -270,41 +232,30 @@ input {
 
 .received::after {
   content: "";
-
   position: absolute;
   bottom: 0;
   left: -10px;
-
   background-color: #5b5757;
-
   display: block;
-
   width: 10px;
   height: 10px;
 }
 
 .sent {
   position: relative;
-
   background-color: #818181;
-
-  border-bottom-right-radius: 0px;
-
+  border-bottom-right-radius: 0;
   justify-self: right;
 }
 
 .sent::before {
   content: "";
-
   position: absolute;
   z-index: 1;
   bottom: 0;
   right: -10px;
-
   background-color: #e7e7e7;
-
   display: block;
-
   width: 10px;
   height: 10px;
   border-bottom-left-radius: 10px;
@@ -312,15 +263,11 @@ input {
 
 .sent::after {
   content: "";
-
   position: absolute;
   bottom: 0;
   right: -10px;
-
   background-color: #818181;
-
   display: block;
-
   width: 10px;
   height: 10px;
 }
@@ -329,15 +276,12 @@ input {
 
 .composing-area {
   background-color: #818181;
-
   width: 100%;
   height: 50px;
-
   flex-shrink: 0;
   display: flex;
   align-items: center;
   column-gap: 5px;
-
   padding-inline: 5px;
 }
 
@@ -345,7 +289,6 @@ input {
 .send-button,
 .clip-icon {
   background-color: #d9d9d9;
-
   width: 30px;
   height: 30px;
 }
@@ -353,10 +296,8 @@ input {
 .message-bar {
   background-color: #787878;
   color: white;
-
   height: 30px;
   flex-grow: 1;
-
   padding-left: 3px;
   font-size: var(--font-size-m);
 }
