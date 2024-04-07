@@ -1,0 +1,72 @@
+.Message {
+  max-width: var(--max-message-width);
+  border-radius: 20px;
+  font-size: var(--font-size-m);
+  padding: 7px 13px;
+}
+
+.MessageText {
+  color: white;
+}
+
+.received {
+  position: relative;
+  background-color: #5b5757;
+  border-bottom-left-radius: 0;
+  justify-self: left;
+}
+
+.received::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: -10px;
+  background-color: #e7e7e7;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.received::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -10px;
+  background-color: #5b5757;
+  display: block;
+  width: 10px;
+  height: 10px;
+}
+
+.sent {
+  position: relative;
+  background-color: #818181;
+  border-bottom-right-radius: 0;
+  justify-self: right;
+}
+
+.sent::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  right: -10px;
+  background-color: #e7e7e7;
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.sent::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -10px;
+  background-color: #818181;
+  display: block;
+  width: 10px;
+  height: 10px;
+}

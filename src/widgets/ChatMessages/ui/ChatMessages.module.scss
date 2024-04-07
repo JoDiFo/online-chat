@@ -1,0 +1,12 @@
+.ChatMessages {
+  position: relative;
+  height: calc(100% - 40px - 50px - 10px);
+  flex-grow: 1;
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: min-content;
+  row-gap: 5px;
+  padding-inline: 30px;
+  overflow-y: scroll;
+}

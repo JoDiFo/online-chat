@@ -1,0 +1,56 @@
+@supports (scrollbar-color: auto) {
+  .ChatList {
+    scrollbar-color: #d9d9d9 #787878;
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  .ChatList::-webkit-scrollbar {
+    background: #d9d9d9;
+  }
+
+  .ChatList::-webkit-scrollbar-thumb {
+    background: #787878;
+  }
+}
+
+.ChatList {
+  position: relative;
+  background-color: #c9c9c9;
+  width: 429px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  row-gap: 5px;
+  padding-top: 5px;
+  overflow-y: scroll;
+}
+
+.SearchBar {
+  background-color: #ababab;
+  width: 409px;
+  height: 30px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-shrink: 0;
+  padding-right: 3px;
+}
+
+.SearchIcon {
+  background-color: #d9d9d9;
+  width: 24px;
+  height: 24px;
+}
+
+.AddChat {
+  position: fixed;
+  z-index: 1;
+  bottom: 10px;
+  left: 420px;
+  background-color: #787878;
+  width: 50px;
+  height: 50px;
+}
