@@ -18,18 +18,21 @@ export const LoginForm = () => {
     setPassword(e.target.value);
   };
 
-  const onSubmit = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000", {
-      username,
-      email,
-      password,
-    });
+    axios
+      .post("http://localhost:5000/post", {
+        username,
+        email,
+        password,
+      })
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   };
 
   return (
-    <form className={cls.LoginForm}>
+    <form className={cls.LoginForm} onSubmit={onSubmit}>
       <label htmlFor="username">Enter your username</label>
       <input
         type="text"
@@ -51,7 +54,7 @@ export const LoginForm = () => {
         value={password}
         onChange={handlePasswordChange}
       />
-      <input type="submit" value={"submit"} onClick={onSubmit} />
+      <input type="submit" value={"submit"} />
     </form>
   );
 };
