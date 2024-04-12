@@ -12,12 +12,13 @@ import {
 import mailService from "./mail-service";
 import tokenService from "./token-service";
 import UserDto from "../dtos/user-dto";
+import ApiError from "../exceptions/api-error";
 
 class UserService {
   async register(email: string, password: string) {
     const candidate = await client.query<DUser>(FIND_USER_BY_EMAIL, [email]);
     if (candidate.rowCount !== 0) {
-      throw new Error(`User with this email address (${email}) already exists`);
+      throw ApiError.BadRequest(`User with this email address (${email}) already exists`);
     }
 
     const hashedPassword = await bcrypt.hash(password, 3);
@@ -54,7 +55,7 @@ class UserService {
     ]);
 
     if (user.rowCount === 0) {
-      throw new Error("Incorrect activation link");
+      throw ApiError.BadRequest("Incorrect activation link");
     }
 
     await client.query(ACTIVATE_USER, [user.rows[0].user_id]);
