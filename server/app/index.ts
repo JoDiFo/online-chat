@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import "dotenv/config";
+import mongoose from "mongoose";
 
 import router from "./router";
 
@@ -15,6 +16,11 @@ app.use("/api", router);
 
 async function start() {
   try {
+    const mongodbUri = process.env.MONGODB_URI;
+    if (!mongodbUri) {
+      throw new Error("mongodb uri was not provided")
+    }
+    await mongoose.connect(mongodbUri)
     app.listen(PORT, () => {
       console.log(`running on http://localhost:${PORT}`);
     });
