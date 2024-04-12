@@ -3,13 +3,18 @@ import bcrypt from "bcrypt";
 import "dotenv/config";
 
 import { client } from "../db/connection";
-import { FIND_USER_BY_EMAIL, REGISTER_USER } from "../db/queries";
+import {
+  FIND_USER_BY_EMAIL,
+  REGISTER_USER,
+  FIND_USER_BY_ACTIVATION_LINK,
+  ACTIVATE_USER,
+} from "../db/queries";
 import mailService from "./mail-service";
 import tokenService from "./token-service";
 import UserDto from "../dtos/user-dto";
 
 class UserService {
-  async registration(email: string, password: string) {
+  async register(email: string, password: string) {
     const candidate = await client.query<DUser>(FIND_USER_BY_EMAIL, [email]);
     if (candidate.rowCount !== 0) {
       throw new Error(`User with this email address (${email}) already exists`);
@@ -41,6 +46,18 @@ class UserService {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async activate(activationLink: string) {
+    const user = await client.query<DUser>(FIND_USER_BY_ACTIVATION_LINK, [
+      activationLink,
+    ]);
+
+    if (user.rowCount === 0) {
+      throw new Error("Incorrect activation link");
+    }
+
+    await client.query(ACTIVATE_USER, [user.rows[0].user_id]);
   }
 }
 
