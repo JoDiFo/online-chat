@@ -1,10 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import userService from "../service/user-service";
 import "dotenv/config";
+import { validationResult } from "express-validator";
+import ApiError from "../exceptions/api-error";
 
 class UserController {
   public async register(req: Request, res: Response, next: NextFunction) {
     try {
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return next(ApiError.BadRequest("validation error", errors.array()));
+      }
       const { email, password } = req.body;
       const userData = await userService.register(email, password);
       res.cookie("refreshToken", userData.refreshToken, {
