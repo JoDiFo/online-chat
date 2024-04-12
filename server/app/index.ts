@@ -18,9 +18,11 @@ async function start() {
   try {
     const mongodbUri = process.env.MONGODB_URI;
     if (!mongodbUri) {
-      throw new Error("mongodb uri was not provided")
+      throw new Error("mongodb uri was not provided");
     }
-    await mongoose.connect(mongodbUri)
+
+    await mongoose.connect(mongodbUri);
+
     app.listen(PORT, () => {
       console.log(`running on http://localhost:${PORT}`);
     });

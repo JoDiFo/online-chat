@@ -1,6 +1,8 @@
-import { client } from "../db/connection";
-import bcrypt from "bcrypt";
 import { v4 } from "uuid";
+import bcrypt from "bcrypt";
+import "dotenv/config";
+
+import { client } from "../db/connection";
 import { FIND_USER_BY_EMAIL, REGISTER_USER } from "../db/queries";
 import mailService from "./mail-service";
 import tokenService from "./token-service";
@@ -21,7 +23,15 @@ class UserService {
       hashedPassword,
       activationLink,
     ]);
-    await mailService.sendActivationMail(email, activationLink);
+
+    const apiUrl = process.env.API_URL;
+    if (!apiUrl) {
+      throw new Error("api url is not defined");
+    }
+    await mailService.sendActivationMail(
+      email,
+      `${apiUrl}/api/activate/${activationLink}`
+    );
 
     const userDto = new UserDto(user.rows[0]);
     const tokens = tokenService.generateTokens({ ...userDto });
