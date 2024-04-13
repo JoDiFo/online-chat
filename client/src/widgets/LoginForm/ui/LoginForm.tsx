@@ -1,12 +1,13 @@
-import { useState } from "react";
-import axios from "axios";
+import { useContext, useState } from "react";
 
 import cls from "./LoginForm.module.scss";
+import { Context } from "@/index";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { store } = useContext(Context);
 
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
@@ -20,15 +21,7 @@ export const LoginForm = () => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    axios
-      .post("http://localhost:5000/post", {
-        username,
-        email,
-        password,
-      })
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+    store.register(email, password);
   };
 
   return (
