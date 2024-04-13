@@ -32,3 +32,7 @@ set
 where
 	user_id = $1
 `;
+
+export const GET_ALL_USERS = `
+select * from users
+`;

@@ -9,6 +9,7 @@ import {
   FIND_USER_BY_ACTIVATION_LINK,
   ACTIVATE_USER,
   FIND_USER_BY_ID,
+  GET_ALL_USERS,
 } from "../db/queries";
 import mailService from "./mail-service";
 import tokenService from "./token-service";
@@ -115,6 +116,11 @@ class UserService {
       ...tokens,
       user: userDto,
     };
+  }
+
+  async getAllUsers() {
+    const users = await client.query<DUser>(GET_ALL_USERS);
+    return users.rows;
   }
 }
 
