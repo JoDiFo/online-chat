@@ -8,11 +8,13 @@ import {
   REGISTER_USER,
   FIND_USER_BY_ACTIVATION_LINK,
   ACTIVATE_USER,
+  FIND_USER_BY_ID,
 } from "../db/queries";
 import mailService from "./mail-service";
 import tokenService from "./token-service";
-import UserDto from "../dtos/user-dto";
+import UserDto from "../dto/user-dto";
 import ApiError from "../exceptions/api-error";
+import { JwtPayload } from "jsonwebtoken";
 
 class UserService {
   async register(email: string, password: string) {
@@ -88,6 +90,31 @@ class UserService {
   async logout(refreshToken: string) {
     const token = await tokenService.removeToken(refreshToken);
     return token;
+  }
+
+  async refresh(refreshToken: string) {
+    if (!ReferenceError) {
+      throw ApiError.UnauthorizedError();
+    }
+
+    const userData = tokenService.validateRefreshToken(
+      refreshToken
+    ) as JwtPayload;
+    const tokenFromDB = await tokenService.findToken(refreshToken);
+
+    if (!userData || !tokenFromDB) {
+      throw ApiError.UnauthorizedError();
+    }
+
+    const user = await client.query<DUser>(FIND_USER_BY_ID, [userData.id]);
+    const userDto = new UserDto(user.rows[0]);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
   }
 }
 

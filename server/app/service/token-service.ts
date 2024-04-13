@@ -26,6 +26,34 @@ class TokenService {
     };
   }
 
+  validateAccessToken(token: string) {
+    try {
+      const accessSecret = process.env.JWT_ACCESS_SECRET;
+      if (!accessSecret) {
+        throw new Error("access secret is not defined");
+      }
+
+      const userData = jwt.verify(token, accessSecret);
+      return userData;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  validateRefreshToken(token: string) {
+    try {
+      const refreshSecret = process.env.JWT_REFRESH_SECRET;
+      if (!refreshSecret) {
+        throw new Error("refresh secret is not defined");
+      }
+
+      const userData = jwt.verify(token, refreshSecret);
+      return userData;
+    } catch (error) {
+      return null;
+    }
+  }
+
   async saveToken(userId: number, refreshToken: string) {
     const tokenData = await tokenModel.findOne({ userId });
     if (tokenData) {
@@ -39,6 +67,11 @@ class TokenService {
 
   async removeToken(refreshToken: string) {
     const tokenData = await tokenModel.deleteOne({ refreshToken });
+    return tokenData;
+  }
+
+  async findToken(refreshToken: string) {
+    const tokenData = await tokenModel.findOne({ refreshToken });
     return tokenData;
   }
 }

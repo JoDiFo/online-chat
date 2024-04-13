@@ -14,6 +14,11 @@ select * from users
 where users.email = $1
 `;
 
+export const FIND_USER_BY_ID = `
+select * from users
+where users.user_id = $1
+`;
+
 export const FIND_USER_BY_ACTIVATION_LINK = `
 select * from users
 where users.activation_link = $1
