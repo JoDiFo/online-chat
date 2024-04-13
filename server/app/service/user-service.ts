@@ -84,6 +84,11 @@ class UserService {
 
     await client.query(ACTIVATE_USER, [user.rows[0].user_id]);
   }
+
+  async logout(refreshToken: string) {
+    const token = await tokenService.removeToken(refreshToken);
+    return token;
+  }
 }
 
 export default new UserService();
