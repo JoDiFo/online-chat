@@ -18,7 +18,7 @@ class UserService {
   async register(email: string, password: string) {
     const candidate = await client.query<DUser>(FIND_USER_BY_EMAIL, [email]);
     if (candidate.rowCount !== 0) {
-      throw ApiError.BadRequest(`User with this email address (${email}) already exists`);
+      throw ApiError.BadRequest("User with this email address already exists");
     }
 
     const hashedPassword = await bcrypt.hash(password, 3);
@@ -38,6 +38,30 @@ class UserService {
       email,
       `${apiUrl}/api/activate/${activationLink}`
     );
+
+    const userDto = new UserDto(user.rows[0]);
+    const tokens = tokenService.generateTokens({ ...userDto });
+    await tokenService.saveToken(userDto.id, tokens.refreshToken);
+
+    return {
+      ...tokens,
+      user: userDto,
+    };
+  }
+
+  async login(email: string, password: string) {
+    const user = await client.query<DUser>(FIND_USER_BY_EMAIL, [email]);
+    if (user.rowCount === 0) {
+      throw ApiError.BadRequest("user with this email does not exist");
+    }
+
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.rows[0].password
+    );
+    if (!isPasswordCorrect) {
+      throw ApiError.BadRequest("incorrect password");
+    }
 
     const userDto = new UserDto(user.rows[0]);
     const tokens = tokenService.generateTokens({ ...userDto });
