@@ -1,8 +1,8 @@
-import { IUser } from "@/models/User";
+import { IUser } from "@/entities/User";
 import AuthService from "@/app/Services/AuthService";
 import axios from "axios";
 import { API_URL } from "@/app/http";
-import { IAuthResponse } from "@/models/response/AuthResponse";
+import { IAuthResponse } from "@/entities/response/AuthResponse";
 
 export default class Store {
   user = {} as IUser;

@@ -1,5 +1,5 @@
 import $api from "@/app/http";
-import { IUser } from "@/models/User";
+import { IUser } from "@/entities/User";
 import { AxiosResponse } from "axios";
 
 export default class UserService {

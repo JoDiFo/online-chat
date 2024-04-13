@@ -1,4 +1,4 @@
-import { IAuthResponse } from "@/models/response/AuthResponse";
+import { IAuthResponse } from "@/entities/response/AuthResponse";
 import axios from "axios";
 
 export const API_URL = "http://localhost:5000/api";
