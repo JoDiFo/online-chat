@@ -1,19 +1,14 @@
-import React, { createContext } from "react";
+import React from "react";
 import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
 
 import App from "@/app/App";
-import Store from "@/app/store/store";
-
-const store = new Store();
-
-export const Context = createContext({
-  store,
-});
+import { store } from "@/app/redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <Context.Provider value={{ store }}>
+    <Provider store={store}>
       <App />
-    </Context.Provider>
+    </Provider>
   </React.StrictMode>,
 );
