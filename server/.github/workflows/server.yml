@@ -1,4 +1,4 @@
-name: Client CI
+name: Server CI
 
 on:
   push:
@@ -22,8 +22,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cd client
     - run: npm ci
     - run: npm run build
     - run: npm lint:ts:fix
-    - run: npm lint:scss:fix
