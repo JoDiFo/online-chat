@@ -1,6 +1,6 @@
 export interface IErrorResponse {
-    response: {
-        data: {
+  response: {
+    data: {
       message: string;
     };
   };

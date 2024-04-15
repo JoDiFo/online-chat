@@ -35,4 +35,4 @@ jobs:
       run: npm run build
 
     - name: Lint and fix typescript
-      run: npm run lint:ts:fix
+      run: npm run lint:ts

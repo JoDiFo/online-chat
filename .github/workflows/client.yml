@@ -35,7 +35,7 @@ jobs:
       run: npm run build
 
     - name: Lint and fix typescript
-      run: npm run lint:ts:fix
+      run: npm run lint:ts
       
     - name: List and fix scss
-      run: npm run lint:scss:fix
+      run: npm run lint:scss
