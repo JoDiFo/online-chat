@@ -1,17 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
 
 import App from "@/app/App";
-import { store } from "@/app/redux/store";
 import { ErrorBoundary } from "@/app/providers/ErrorBoundary";
+import { ReduxProvider } from "./app/providers/ReduxProvider";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ErrorBoundary>
-      <Provider store={store}>
+      <ReduxProvider>
         <App />
-      </Provider>
+      </ReduxProvider>
     </ErrorBoundary>
   </React.StrictMode>,
 );
