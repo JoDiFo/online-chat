@@ -6,6 +6,7 @@ import { AppDispatch } from "@/app/redux/store";
 import axios from "axios";
 import { IAuthResponse } from "@/entities/response/AuthResponse";
 import { API_URL } from "@/app/http";
+import { IErrorResponse } from "@/entities/response/ErrorResponse";
 
 export const loginUser =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
@@ -15,8 +16,8 @@ export const loginUser =
       localStorage.setItem("token", response.data.accessToken);
       dispatch(setAuth(true));
       dispatch(setUser(response.data.user));
-    } catch (error: any) {
-      console.log(error.response?.data?.message);
+    } catch (error: unknown) {
+      console.log((error as IErrorResponse).response?.data?.message);
     }
   };
 
@@ -28,8 +29,8 @@ export const registerUser =
       localStorage.setItem("token", response.data.accessToken);
       dispatch(setAuth(true));
       dispatch(setUser(response.data.user));
-    } catch (error: any) {
-      console.log(error.response?.data?.message);
+    } catch (error: unknown) {
+      console.log((error as IErrorResponse).response?.data?.message);
     }
   };
 
@@ -39,8 +40,8 @@ export const logout = () => async (dispatch: AppDispatch) => {
     localStorage.removeItem("token");
     dispatch(setAuth(false));
     dispatch(setUser({} as IUser));
-  } catch (error: any) {
-    console.log(error.response?.data?.message);
+  } catch (error: unknown) {
+    console.log((error as IErrorResponse).response?.data?.message);
   }
 };
 
@@ -54,8 +55,8 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
     localStorage.setItem("token", response.data.accessToken);
     dispatch(setAuth(true));
     dispatch(setUser(response.data.user));
-  } catch (error: any) {
-    console.log(error.response?.data?.message);
+  } catch (error: unknown) {
+    console.log((error as IErrorResponse).response?.data?.message);
   } finally {
     dispatch(setLoading(false));
   }
