@@ -30,9 +30,12 @@ jobs:
         cache-dependency-path: client/package-lock.json
     - name: Install dependencies
       run: npm ci
+
     - name: Build project
       run: npm run build
+
     - name: Lint and fix typescript
-      run: npm lint:ts:fix
+      run: npm run lint:ts:fix
+      
     - name: List and fix scss
-      run: npm lint:scss:fix
+      run: npm run lint:scss:fix
