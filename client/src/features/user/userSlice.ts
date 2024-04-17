@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "@/entities/User";
+import { IUser } from "@/entities/user/IUser";
 import AuthService from "@/app/Services/AuthService";
 import { AppDispatch } from "@/app/redux/store";
 import axios from "axios";
@@ -22,9 +22,14 @@ export const loginUser =
   };
 
 export const registerUser =
-  (email: string, password: string) => async (dispatch: AppDispatch) => {
+  (username: string, email: string, password: string) =>
+  async (dispatch: AppDispatch) => {
     try {
-      const response = await AuthService.registration(email, password);
+      const response = await AuthService.registration(
+        username,
+        email,
+        password,
+      );
       console.log(response);
       localStorage.setItem("token", response.data.accessToken);
       dispatch(setAuth(true));

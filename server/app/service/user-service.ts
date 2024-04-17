@@ -18,7 +18,7 @@ import ApiError from "../exceptions/api-error";
 import { JwtPayload } from "jsonwebtoken";
 
 class UserService {
-  async register(email: string, password: string) {
+  async register(username: string, email: string, password: string) {
     const candidate = await client.query<DUser>(FIND_USER_BY_EMAIL, [email]);
     if (candidate.rowCount !== 0) {
       throw ApiError.BadRequest("User with this email address already exists");
@@ -27,7 +27,7 @@ class UserService {
     const hashedPassword = await bcrypt.hash(password, 3);
     const activationLink = v4();
     const user = await client.query<DUser>(REGISTER_USER, [
-      "some",
+      username,
       email,
       hashedPassword,
       activationLink,

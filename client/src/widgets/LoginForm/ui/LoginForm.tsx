@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-import cls from "./LoginForm.module.scss";
 import { useAppDispatch } from "@/app/redux/hooks";
-import { loginUser } from "@/features/user/userSlice";
+import { registerUser } from "@/features/user/userSlice";
+
+import cls from "./LoginForm.module.scss";
 
 export const LoginForm = () => {
   const [username, setUsername] = useState("");
@@ -14,9 +15,11 @@ export const LoginForm = () => {
   const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
+
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
+
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value);
   };
@@ -24,7 +27,7 @@ export const LoginForm = () => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(loginUser(email, password));
+    dispatch(registerUser(username, email, password));
   };
 
   return (
