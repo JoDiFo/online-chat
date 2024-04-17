@@ -1,4 +1,4 @@
-import { IUser } from "@/entities/user/IUser";
+import { IUser } from "@/entities/user";
 
 export interface IAuthResponse {
   accessToken: string;

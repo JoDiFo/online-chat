@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { LoginForm } from "@/widgets/LoginForm";
 import { ModalWindow } from "@/shared/ui/ModalWindow";
 
 import cls from "./Sidebar.module.scss";
+import { UserCard } from "@/entities/user";
 
 export function Sidebar() {
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +24,7 @@ export function Sidebar() {
 
       {showModal ? (
         <ModalWindow setShow={(value) => setShowModal(value)}>
-          <LoginForm />
+          <UserCard />
         </ModalWindow>
       ) : null}
     </>

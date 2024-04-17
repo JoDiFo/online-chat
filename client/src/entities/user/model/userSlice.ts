@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { IUser } from "@/entities/user/IUser";
+import axios from "axios";
+
 import AuthService from "@/app/Services/AuthService";
 import { AppDispatch } from "@/app/redux/store";
-import axios from "axios";
 import { IAuthResponse } from "@/entities/response/AuthResponse";
 import { API_URL } from "@/app/http";
 import { IErrorResponse } from "@/entities/response/ErrorResponse";
+import { IUserState, IUser } from "./types";
 
 export const loginUser =
   (email: string, password: string) => async (dispatch: AppDispatch) => {
@@ -18,6 +19,7 @@ export const loginUser =
       dispatch(setUser(response.data.user));
     } catch (error: unknown) {
       console.log((error as IErrorResponse).response?.data?.message);
+      alert((error as IErrorResponse).response?.data?.message);
     }
   };
 
@@ -36,6 +38,7 @@ export const registerUser =
       dispatch(setUser(response.data.user));
     } catch (error: unknown) {
       console.log((error as IErrorResponse).response?.data?.message);
+      alert((error as IErrorResponse).response?.data?.message);
     }
   };
 
@@ -67,13 +70,7 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
   }
 };
 
-interface UserState {
-  user: IUser;
-  isAuth: boolean;
-  isLoading: boolean;
-}
-
-const initialState: UserState = {
+const initialState: IUserState = {
   user: {} as IUser,
   isAuth: false,
   isLoading: false,

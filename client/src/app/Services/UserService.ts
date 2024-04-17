@@ -1,6 +1,7 @@
-import $api from "@/app/http";
-import { IUser } from "@/entities/user/IUser";
 import { AxiosResponse } from "axios";
+
+import $api from "@/app/http";
+import { IUser } from "@/entities/user";
 
 export default class UserService {
   static fetchUsers(): Promise<AxiosResponse<IUser[]>> {

@@ -1,11 +1,11 @@
 import { useState } from "react";
 
 import { useAppDispatch } from "@/app/redux/hooks";
-import { registerUser } from "@/features/user/userSlice";
+import { registerUser } from "@/entities/user";
 
-import cls from "./LoginForm.module.scss";
+import cls from "./RegisterForm.module.scss";
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <form className={cls.LoginForm} onSubmit={onSubmit}>
+    <form className={cls.RegisterForm} onSubmit={onSubmit}>
       <label htmlFor="username">Enter your username</label>
       <input
         type="text"
