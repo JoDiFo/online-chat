@@ -4,7 +4,7 @@ import { ComposingArea } from "@/widgets/ComposingArea";
 
 import cls from "./ChatArea.module.scss";
 
-export const ChatArea = () => {
+const ChatArea = () => {
   return (
     <div className={cls.ChatArea}>
       <ChatHeader />
@@ -13,3 +13,5 @@ export const ChatArea = () => {
     </div>
   );
 };
+
+export default ChatArea;

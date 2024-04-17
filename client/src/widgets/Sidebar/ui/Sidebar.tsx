@@ -5,7 +5,7 @@ import { ModalWindow } from "@/shared/ui/ModalWindow";
 import cls from "./Sidebar.module.scss";
 import { UserCard } from "@/entities/user";
 
-export function Sidebar() {
+const Sidebar = () => {
   const [showModal, setShowModal] = useState(false);
 
   const onProfileIconClick = () => {
@@ -29,4 +29,6 @@ export function Sidebar() {
       ) : null}
     </>
   );
-}
+};
+
+export default Sidebar;

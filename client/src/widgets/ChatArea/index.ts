@@ -1,1 +1,1 @@
-export { ChatArea } from "./ui/ChatArea";
+export { ChatAreaAsync as ChatArea } from "./ui/ChatArea.async";

@@ -1,7 +1,7 @@
 import { ChatListItem } from "@/widgets/ChatListItem";
 import cls from "./ChatList.module.scss";
 
-export const ChatList = () => {
+const ChatList = () => {
   return (
     <div className={cls.ChatList}>
       <div className={cls.SearchBar}>
@@ -45,3 +45,5 @@ export const ChatList = () => {
     </div>
   );
 };
+
+export default ChatList;

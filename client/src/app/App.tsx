@@ -1,18 +1,20 @@
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
 import { Sidebar } from "@/widgets/Sidebar";
 import { ChatList } from "@/widgets/ChatList";
 import { ChatArea } from "@/widgets/ChatArea";
 import { AuthenticationForm } from "@/widgets/AuthenticationForm";
+import { Loading } from "@/widgets/Loading";
 
 import { useAppDispatch, useAppSelector } from "./redux/hooks";
-import { checkAuth, selectAuth } from "@/entities/user";
+import { checkAuth, selectAuth, selectLoading } from "@/entities/user";
 
 import "./styles/index.scss";
 
 function App() {
   const dispatch = useAppDispatch();
   const isAuth = useAppSelector(selectAuth);
+  const isLoading = useAppSelector(selectLoading);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -20,7 +22,15 @@ function App() {
     }
   }, []);
 
-  if (!isAuth) {
+  if (isLoading) {
+    return (
+      <div className="content">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (!isAuth && !isLoading) {
     return (
       <div className="content">
         <AuthenticationForm />
@@ -30,9 +40,11 @@ function App() {
 
   return (
     <div className="content">
-      <Sidebar />
-      <ChatList />
-      <ChatArea />
+      <Suspense fallback={<Loading />}>
+        <Sidebar />
+        <ChatList />
+        <ChatArea />
+      </Suspense>
     </div>
   );
 }

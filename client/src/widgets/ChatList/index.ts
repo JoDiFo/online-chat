@@ -1,1 +1,1 @@
-export { ChatList } from "./ui/ChatList";
+export { ChatListAsync as ChatList } from "./ui/ChatList.async";
