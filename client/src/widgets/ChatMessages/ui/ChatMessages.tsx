@@ -1,9 +1,16 @@
 import { Message } from "@/widgets/Message";
 import cls from "./ChatMessages.module.scss";
+import { useEffect, useRef } from "react";
 
 export const ChatMessages = () => {
+  const chatRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    chatRef.current?.scrollTo(0, chatRef.current?.scrollHeight);
+  }, []);
+
   return (
-    <div className={cls.ChatMessages}>
+    <div ref={chatRef} className={cls.ChatMessages}>
       <Message messageText="hello" messageType="sent" />
       <Message
         messageText="asdf asdf asdf sadf sadf asdf sadf sadf asdfasdf"
