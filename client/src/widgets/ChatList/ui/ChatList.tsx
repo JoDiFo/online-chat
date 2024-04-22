@@ -40,8 +40,6 @@ const ChatList = () => {
       <ChatListItem username="username" />
       <ChatListItem username="username" />
       <ChatListItem username="username" />
-
-      <button className={cls.AddChat}></button>
     </div>
   );
 };
