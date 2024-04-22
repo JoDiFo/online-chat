@@ -36,3 +36,26 @@ where
 export const GET_ALL_USERS = `
 select * from users
 `;
+
+export const CREATE_CHAT = `
+insert into chats (chat_name)
+values ($1)
+returning *
+`;
+
+export const ADD_USER_TO_CHAT = `
+insert into chat_members (chat_id, user_id)
+values ($1, $2)
+returning *
+`;
+
+export const DELETE_CHAT = `
+delete from chats 
+where chat_id = $1
+returning *;
+`;
+
+export const DELETE_CHAT_MEMBERS = `
+delete from chat_members 
+where chat_id = $1
+`;
