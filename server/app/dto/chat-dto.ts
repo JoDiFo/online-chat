@@ -1,11 +1,11 @@
 export default class ChatDto {
   public chatId: number;
   public chatName: string;
-  public members: number[];
+  public chatMembers: number[];
 
-  constructor(chat: DChats, chat_members: DChatMembers[]) {
+  constructor(chat: DChat, chat_members: DChatMember[]) {
     this.chatId = chat.chat_id;
     this.chatName = chat.chat_name;
-    this.members = chat_members.map((chat_member) => chat_member.user_id);
+    this.chatMembers = chat_members.map((chat_member) => chat_member.user_id);
   }
 }

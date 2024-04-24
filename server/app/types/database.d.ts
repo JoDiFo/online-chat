@@ -13,12 +13,18 @@ interface DRefreshToken {
   refreshToken: string;
 }
 
-interface DChats {
+interface DChat {
   chat_id: number;
   chat_name: string;
 }
 
-interface DChatMembers {
+interface DChatMember {
   chat_id: number;
   user_id: number;
+}
+
+interface DChatData {
+  chat_id: number;
+  chat_name: string;
+  user_ids: number[];
 }

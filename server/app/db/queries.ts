@@ -59,3 +59,28 @@ export const DELETE_CHAT_MEMBERS = `
 delete from chat_members 
 where chat_id = $1
 `;
+
+export const GET_ALL_CHATS = `
+with "chat_ids" as (
+	select
+		chat_id
+	from
+		chats
+	join chat_members
+			using (chat_id)
+	where
+		user_id = $1) 
+	select
+		chat_id,
+		chat_name,
+		array_agg(user_id) as user_ids
+	from
+		chats
+	join chat_members
+			using (chat_id)
+	join chat_ids
+			using (chat_id)
+	group by
+		chat_id,
+		chat_name
+`;
