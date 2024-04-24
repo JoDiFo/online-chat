@@ -17,7 +17,7 @@ router.post("/logout", UserController.logout);
 router.get("/activate/:link", UserController.activate);
 router.get("/refresh", UserController.refresh);
 router.get("/users", authMiddleware, UserController.getUsers);
-router.get("/chats/:userId", chatController.getAllChats);
+router.get("/chats/:userId", authMiddleware, chatController.getAllChats);
 router.post("/createChat", chatController.createChat);
 router.delete("/deleteChat", chatController.deleteChat);
 
