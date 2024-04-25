@@ -13,6 +13,13 @@ interface DRefreshToken {
   refreshToken: string;
 }
 
+interface DMessage {
+  senderId: number;
+  chatId: number;
+  text: string;
+  isEdited: string;
+}
+
 interface DChat {
   chat_id: number;
   chat_name: string;
