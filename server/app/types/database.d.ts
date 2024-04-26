@@ -14,10 +14,11 @@ interface DRefreshToken {
 }
 
 interface DMessage {
+  _id: ObjectId;
   senderId: number;
   chatId: number;
   text: string;
-  isEdited: string;
+  isEdited: boolean;
 }
 
 interface DChat {

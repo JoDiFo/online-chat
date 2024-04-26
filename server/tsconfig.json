@@ -105,5 +105,5 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
   "include": ["app/**/*"],
-  "files": ["app/types/database.d.ts"]
+  "files": ["app/types/database.d.ts", "app/types/entities.d.ts"]
 }

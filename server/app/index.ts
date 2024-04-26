@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 
 import router from "./router";
 import errorMiddleware from "./middlewares/error-middleware";
+import messageModel from "./models/message-model";
 
 const PORT = process.env.PORT || 5000;
 
@@ -22,6 +23,18 @@ app.use(cookieParser());
 app.use("/api", router);
 app.use(errorMiddleware);
 
+function setupWebsocketServer(wsServer: WebSocketServer) {
+  wsServer.on("connection", (ws) => {
+    ws.send("connected");
+
+    ws.on("message", async (data) => {
+      const message: EReceivedMessage = JSON.parse(data.toString());
+      messageModel.insertMany([message]);
+      ws.send("message received");
+    });
+  });
+}
+
 async function start() {
   try {
     const mongodbUri = process.env.MONGODB_URI;
@@ -36,14 +49,7 @@ async function start() {
     });
 
     const wsServer = new WebSocketServer({ server });
-
-    wsServer.on("connection", (ws) => {
-      ws.send("connected");
-
-      ws.on("message", (data) => {
-        ws.send(data);
-      });
-    });
+    setupWebsocketServer(wsServer);
   } catch (error) {
     console.log(error);
   }

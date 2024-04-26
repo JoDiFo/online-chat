@@ -1,22 +1,26 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import cls from "./ComposingArea.module.scss";
+import { useAppSelector } from "@/app/redux/hooks";
+import { selectUser } from "@/entities/user";
 
-export const ComposingArea = () => {
-  const socket = useRef<WebSocket>();
+interface ComposingAreaProps {
+  sendMessage: (message: string) => void;
+}
 
+export const ComposingArea = ({ sendMessage }: ComposingAreaProps) => {
   const [message, setMessage] = useState("");
+  const userId = useAppSelector(selectUser).id;
 
-  useEffect(() => {
-    socket.current = new WebSocket("ws://localhost:5000/");
-  }, []);
-
-  const sendMessage = async () => {
+  const onSendMessage = async () => {
     const messageObj = {
       event: "message",
+      senderId: userId,
+      chatId: -1,
       text: message,
+      isEdited: false,
     };
 
-    socket.current?.send(JSON.stringify(messageObj));
+    sendMessage(JSON.stringify(messageObj));
     setMessage("");
   };
 
@@ -35,7 +39,7 @@ export const ComposingArea = () => {
         onChange={handleChange}
       />
       <button className={cls.EmojiButton}></button>
-      <button className={cls.SendButton} onClick={sendMessage}></button>
+      <button className={cls.SendButton} onClick={onSendMessage}></button>
     </div>
   );
 };
