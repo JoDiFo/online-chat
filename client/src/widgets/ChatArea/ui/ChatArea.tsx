@@ -25,7 +25,6 @@ const ChatArea = () => {
 
     socket.current.onmessage = (event) => {
       setMessages(JSON.parse(event.data));
-      console.log(JSON.parse(event.data));
     };
   }, [chatId]);
 

@@ -32,13 +32,14 @@ function setupWebsocketServer(wsServer: WebSocketServer) {
 
       switch (message.event) {
       case "message":
-        messageModel.insertMany([message]);
+        await messageModel.insertMany([message]);
         break;
       case "connection":
-        const messages = await messageModel.find({ chatId: message.chatId });
-        ws.send(JSON.stringify(messages));
         break;
       }
+
+      const messages = await messageModel.find({ chatId: message.chatId });
+      ws.send(JSON.stringify(messages));
     });
   });
 }
