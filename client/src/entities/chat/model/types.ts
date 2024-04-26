@@ -3,3 +3,7 @@ export interface IChat {
   chatName: string;
   chatMembers: number[];
 }
+
+export interface IChatSlice {
+  selectedId: number | null;
+}

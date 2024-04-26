@@ -2,6 +2,7 @@ import { useState } from "react";
 import cls from "./ComposingArea.module.scss";
 import { useAppSelector } from "@/app/redux/hooks";
 import { selectUser } from "@/entities/user";
+import { selectChatId } from "@/entities/chat";
 
 interface ComposingAreaProps {
   sendMessage: (message: string) => void;
@@ -10,12 +11,13 @@ interface ComposingAreaProps {
 export const ComposingArea = ({ sendMessage }: ComposingAreaProps) => {
   const [message, setMessage] = useState("");
   const userId = useAppSelector(selectUser).id;
+  const chatId = useAppSelector(selectChatId);
 
   const onSendMessage = async () => {
     const messageObj = {
       event: "message",
       senderId: userId,
-      chatId: -1,
+      chatId,
       text: message,
       isEdited: false,
     };
