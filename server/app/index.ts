@@ -25,12 +25,20 @@ app.use(errorMiddleware);
 
 function setupWebsocketServer(wsServer: WebSocketServer) {
   wsServer.on("connection", (ws) => {
-    ws.send("connected");
-
     ws.on("message", async (data) => {
-      const message: EReceivedMessage = JSON.parse(data.toString());
-      messageModel.insertMany([message]);
-      ws.send("message received");
+      const message: EReceivedConnection | EReceivedMessage = JSON.parse(
+        data.toString()
+      );
+
+      switch (message.event) {
+      case "message":
+        messageModel.insertMany([message]);
+        break;
+      case "connection":
+        const messages = await messageModel.find({ chatId: message.chatId });
+        ws.send(JSON.stringify(messages));
+        break;
+      }
     });
   });
 }
