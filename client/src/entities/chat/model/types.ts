@@ -6,4 +6,5 @@ export interface IChat {
 
 export interface IChatSlice {
   selectedId: number | null;
+  allChats: IChat[];
 }

@@ -1,28 +1,28 @@
 import { useEffect, useState } from "react";
-import cls from "./CreateChatForm.module.scss";
-import $api from "@/app/http";
-import { AxiosResponse } from "axios";
-import { IUser } from "@/entities/user";
-import { useAppSelector } from "@/app/redux/hooks";
+
+import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { selectUser as selectCurrentUser } from "@/entities/user";
+import ChatService from "@/app/Services/ChatService";
+import { IUser } from "@/entities/user";
+import { fetchChats } from "@/entities/chat";
+import UserService from "@/app/Services/UserService";
+
+import cls from "./CreateChatForm.module.scss";
 
 export const CreateChatForm = () => {
+  const dispatch = useAppDispatch();
   const userId = useAppSelector(selectCurrentUser).id;
   const [users, setUsers] = useState<IUser[]>([]);
   const [selectedUsers, setSelectedUsers] = useState<IUser[]>([]);
   const [chatName, setChatName] = useState<string>("");
 
-  const fetchUsers = async () => {
-    $api
-      .get("/users")
-      .then((response: AxiosResponse<IUser[]>) => setUsers(response.data));
-  };
-
   const createChat = async () => {
-    $api.post("/createChat", {
-      chatName,
-      userIds: selectedUsers.map((user) => user.id),
-    });
+    await ChatService.createChat(chatName, [
+      ...selectedUsers.map((user) => user.id),
+      userId,
+    ]);
+
+    dispatch(fetchChats(userId));
   };
 
   const selectUser = (user: IUser) => {
@@ -42,7 +42,7 @@ export const CreateChatForm = () => {
   };
 
   useEffect(() => {
-    fetchUsers();
+    UserService.fetchUsers().then((res) => setUsers(res.data));
   }, []);
 
   return (

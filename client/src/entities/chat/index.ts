@@ -4,6 +4,8 @@ export {
   chatSlice,
   deselectChat,
   selectChat,
+  setChats,
+  fetchChats,
   default as chatReducer,
 } from "./model/chatSlice";
-export { selectChatId } from "./model/selectors";
+export { selectChatId, selectChats } from "./model/selectors";

@@ -10,3 +10,8 @@ export const selectChatId = createSelector(
   selectBase,
   (state) => state.selectedId,
 );
+
+export const selectChats = createSelector(
+  selectBase,
+  (state) => state.allChats,
+);

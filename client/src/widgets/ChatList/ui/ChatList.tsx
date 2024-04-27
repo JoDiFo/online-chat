@@ -1,26 +1,23 @@
-import { ChatListItem, selectChat, selectChatId } from "@/entities/chat";
+import {
+  ChatListItem,
+  fetchChats,
+  selectChat,
+  selectChatId,
+  selectChats,
+} from "@/entities/chat";
 import cls from "./ChatList.module.scss";
-import { useEffect, useState } from "react";
-import ChatService from "@/app/Services/ChatService";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/app/redux/hooks";
 import { selectUser } from "@/entities/user";
-import { IChat } from "@/entities/chat";
 
 const ChatList = () => {
   const dispatch = useAppDispatch();
+  const chats = useAppSelector(selectChats);
   const selectedChatId = useAppSelector(selectChatId);
   const userId = useAppSelector(selectUser).id;
-  const [chats, setChats] = useState<IChat[]>([]);
-
-  // TODO MOVE TO ANOTHER FILE
-  const fetchChats = async () => {
-    const newChats = await ChatService.getChats(userId);
-    console.log(newChats);
-    setChats(newChats.data);
-  };
 
   useEffect(() => {
-    fetchChats();
+    dispatch(fetchChats(userId));
   }, []);
 
   return (
