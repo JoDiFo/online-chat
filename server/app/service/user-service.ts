@@ -120,7 +120,7 @@ class UserService {
 
   async getAllUsers() {
     const users = await client.query<DUser>(GET_ALL_USERS);
-    return users.rows;
+    return users.rows.map(user => new UserDto(user));
   }
 }
 

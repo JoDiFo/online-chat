@@ -1,15 +1,21 @@
 import { useState } from "react";
 
 import { ModalWindow } from "@/shared/ui/ModalWindow";
+import { UserCard } from "@/entities/user";
+import { CreateChatForm } from "@/features/createChat";
 
 import cls from "./Sidebar.module.scss";
-import { UserCard } from "@/entities/user";
 
 const Sidebar = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [showUser, setShowUser] = useState(false);
+  const [showCreateChat, setShowCreateChat] = useState(false);
 
   const onProfileIconClick = () => {
-    setShowModal(!showModal);
+    setShowUser(!showUser);
+  };
+
+  const onCreateChatIconClick = () => {
+    setShowCreateChat(!showUser);
   };
 
   return (
@@ -17,14 +23,20 @@ const Sidebar = () => {
       <div className={cls.Sidebar}>
         <button className={cls.BurgerMenu}></button>
         <button className={cls.Icon} onClick={onProfileIconClick}></button>
-        <button className={cls.Icon}></button>
+        <button className={cls.Icon} onClick={onCreateChatIconClick}></button>
         <button className={cls.Icon}></button>
         <button className={cls.Icon}></button>
       </div>
 
-      {showModal ? (
-        <ModalWindow setShow={(value) => setShowModal(value)}>
+      {showUser ? (
+        <ModalWindow setShow={(value) => setShowUser(value)}>
           <UserCard />
+        </ModalWindow>
+      ) : null}
+
+      {showCreateChat ? (
+        <ModalWindow setShow={(value) => setShowCreateChat(value)}>
+          <CreateChatForm />
         </ModalWindow>
       ) : null}
     </>
