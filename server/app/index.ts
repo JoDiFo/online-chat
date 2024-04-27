@@ -39,7 +39,9 @@ function setupWebsocketServer(wsServer: WebSocketServer) {
       }
 
       const messages = await messageModel.find({ chatId: message.chatId });
-      ws.send(JSON.stringify(messages));
+      wsServer.clients.forEach((client) =>
+        client.send(JSON.stringify(messages))
+      );
     });
   });
 }
