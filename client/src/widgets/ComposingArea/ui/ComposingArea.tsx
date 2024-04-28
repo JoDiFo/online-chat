@@ -30,8 +30,14 @@ export const ComposingArea = ({ sendMessage }: ComposingAreaProps) => {
     setMessage(e.target.value);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter") {
+      onSendMessage();
+    }
+  };
+
   return (
-    <div className={cls.ComposingArea}>
+    <div className={cls.ComposingArea} onKeyDown={handleKeyDown}>
       <button className={cls.ClipIcon}></button>
       <input
         className={cls.MessageBar}
