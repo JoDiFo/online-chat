@@ -1,0 +1,15 @@
+.ActionsPopup {
+  position: fixed;
+  z-index: 10;
+  background-color: #181818;
+  color: #c6c6c6;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    padding: 10px 20px;
+    background: inherit;
+    border: none;
+    color: #c6c6c6;
+  }
+}
