@@ -3,9 +3,15 @@ import cls from "./ActionsPopup.module.scss";
 
 interface ActionsPopupProps {
   coordinates: IPoint;
+  onDelete: () => void;
+  onEdit: () => void;
 }
 
-export const ActionsPopup = ({ coordinates }: ActionsPopupProps) => {
+export const ActionsPopup = ({
+  coordinates,
+  onDelete,
+  onEdit,
+}: ActionsPopupProps) => {
   return (
     <div
       className={cls.ActionsPopup}
@@ -14,8 +20,8 @@ export const ActionsPopup = ({ coordinates }: ActionsPopupProps) => {
         left: coordinates.x.toString() + "px",
       }}
     >
-      <button>Delete</button>
-      <button>Edit</button>
+      <button onClick={onDelete}>Delete</button>
+      <button onClick={onEdit}>Edit</button>
     </div>
   );
 };

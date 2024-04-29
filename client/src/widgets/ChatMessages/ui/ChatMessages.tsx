@@ -37,6 +37,9 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
     setShowPopup(false);
   };
 
+  const handleDeleteMessage = async () => {};
+  const handleEditMessage = async () => {};
+
   if (messages.length === 0) {
     return <div>No messages yet</div>;
   }
@@ -52,7 +55,13 @@ export const ChatMessages = ({ messages }: ChatMessagesProps) => {
         />
       ))}
 
-      {showPopup ? <ActionsPopup coordinates={coordinates} /> : null}
+      {showPopup ? (
+        <ActionsPopup
+          coordinates={coordinates}
+          onDelete={handleDeleteMessage}
+          onEdit={handleEditMessage}
+        />
+      ) : null}
     </div>
   );
 };
